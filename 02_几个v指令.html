@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        [v-cloak] {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+<script>
+    /*
+     * v-cloak：解决屏幕闪动的问题
+     * v-text：解决屏幕闪动的问题
+     * v-html：解决内容中带有HTML标签的问题
+     * v-bind：绑定属性 可以简写 只有一个冒号：
+     * v-on：绑定事件 可以简写 只有一个艾特符号@
+     * {{}}：插值表达式
+     * */
+</script>
+
+<div id="app">
+    <p v-cloak>{{ msg }}</p>
+    <p v-text="msg"></p>
+    <p v-html="msg2"></p>
+    <input type="button" value="按钮1" v-bind:title="mytitle">
+    <input type="button" value="按钮2" :title="mytitle">
+    <input type="button" value="按钮3" v-on:click="show">
+    <input type="button" value="按钮4" @click="show">
+</div>
+
+<script src="lib/vue-2.4.0.js"></script>
+
+<script>
+    var vm = new Vue({
+        el: '#app',
+        data: {
+            msg: '欢迎学习Vue',
+            msg2: '<h1>我外面包裹了一个h1</h1>',
+            mytitle: '这是一个自己定义的title'
+        },
+        methods: {
+            show: function () {
+                alert('Hello')
+            }
+        }
+    })
+</script>
+</body>
+</html>
