@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="lib/vue-2.4.0.js"></script>
+</head>
+<body>
+
+<div id="app">
+    <input type="button" value="修改msg" @click="msg='No'">
+    <h3 id="h3">{{ msg }}</h3>
+</div>
+
+<script>
+    var vm = new Vue({
+        el: '#app',
+        data: {
+            msg: 'ok'
+        },
+        methods: {
+            show() {
+                console.log('执行了show方法')
+            }
+        },
+        beforeCreate() { // 实例完全被创建出来之前执行
+            // 注意： 在 beforeCreate 生命周期函数执行的时候，data 和 methods 中的 数据都还没有没初始化
+        },
+        created() { // 实例完全被创建出来之后执行
+            console.log(this.msg)
+            this.show()
+        },
+        beforeMount() { // 模板已经在内存中编辑完成了 但是尚未把模板渲染到页面中
+            console.log(document.getElementById('h3').innerText)
+        },
+        mounted() { // 内存中的模板 已经渲染到页面中
+            console.log(document.getElementById('h3').innerText)
+        },
+        // 接下来的是运行中的两个事件
+        beforeUpdate() { // 这时候，表示 我们的界面还没有被更新
+            console.log('beforeUpdate 界面上元素的内容：' + document.getElementById('h3').innerText)
+            console.log('beforeUpdate data 中的 msg 数据是：' + this.msg)
+        },
+        updated() {
+            console.log('updated 界面上元素的内容：' + document.getElementById('h3').innerText)
+            console.log('updated data 中的 msg 数据是：' + this.msg)
+        }
+    });
+</script>
+</body>
+</html>
